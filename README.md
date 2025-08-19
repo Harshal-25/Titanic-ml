@@ -1,5 +1,7 @@
 ## Titanic ML - Flask App
 
+![Screenshot](assets/screenshot.png)
+
 ### Quick start
 
 ```bash
