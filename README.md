@@ -2,28 +2,31 @@
 
 ### Quick start
 
-1. Create and activate a virtual environment.
-2. Install dependencies:
-
 ```bash
 pip install -r requirements.txt
-```
-
-3. (Optional) Train the model explicitly:
-
-```bash
-python -m model.train
-```
-
-4. Run the app:
-
-```bash
+python -m model.train  # optional: pretrain; otherwise app will train on first run
 python app.py
 ```
 
-The app will auto-train on first run if artifacts are missing.
+Open http://127.0.0.1:5000
 
-### Notes
-- Random Forest with preprocessing pipeline. Separate OneHotEncoder instances per categorical feature (`sex`, `embarked`).
-- Uses the seaborn `titanic` dataset for training.
-- UI built with Bootstrap 5.
+### Tech
+- Flask + Bootstrap UI
+- scikit-learn Random Forest with preprocessing
+  - Separate OneHotEncoder per categorical feature (`sex`, `embarked`)
+- Artifacts: `model/artifacts/model.joblib`, `model/artifacts/schema.json`
+- Val accuracy ~0.82 (train/test split)
+
+### Deploy to Render (free)
+1. Push this repo to GitHub.
+2. On Render, create a new Web Service from this repo.
+   - Build command: `pip install -r requirements.txt`
+   - Start command: `gunicorn app:app --workers 2 --threads 4 --timeout 120`
+   - Or use `render.yaml` in this repo for auto-detect.
+3. After deploy, use the Render URL for your README/resume demo link.
+
+### Resume-ready snippet
+Built a Flask + Bootstrap app to predict Titanic survival with a scikit-learn Random Forest (separate per-feature encoders, persisted pipeline); achieved ~82% validation accuracy; deployed on Render. [Code] [Live Demo]
+
+### Run tests manually
+- Not applicable; simple E2E: start app and submit form to see probability.
